@@ -34,7 +34,7 @@ class _NavigationButtonState extends State<NavigationButton> {
         controller: _pagecontroller,
         children: _screens,
         onPageChanged: _onPageChanged,
-        physics: NeverScrollableScrollPhysics(),
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.lightBlueAccent[100],
