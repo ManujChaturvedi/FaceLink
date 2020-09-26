@@ -11,7 +11,8 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   int selectedIndex = 0;
-  Expanded profile_button(String button_name) {
+  // ignore: non_constant_identifier_names
+  Expanded profile_button(String buttonName) {
     return Expanded(
       child: FlatButton(
         onPressed: () {
@@ -21,7 +22,7 @@ class _ProfileState extends State<Profile> {
           children: <Widget>[
             Container(
               child: Text(
-                button_name,
+                buttonName,
                 style: TextStyle(color: Colors.white),
               ),
             ),
