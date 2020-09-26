@@ -16,16 +16,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      // theme: ThemeData(
-      //   primaryColor: Color(0xff80d8ff),
-      //   primarySwatch: Colors.blue,
-      // ),
       home: NavigationButton(),
-    //   initialRoute:'Profile',
-    //     routes:{
-    //       'myHomePage':(context)=>MyHomePage(),
-    //       'Profile':(context)=>Profile(),
-    // },
     );
   }
 }

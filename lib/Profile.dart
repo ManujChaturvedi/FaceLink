@@ -39,12 +39,6 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  void changeIndex(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
-
   bool state = false;
   void changeState() {
     setState(() {
