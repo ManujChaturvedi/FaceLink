@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'NavigationsButton.dart';
+
 import 'post_container.dart';
 
 class Profile extends StatefulWidget {
@@ -60,7 +60,6 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent[100],
-      bottomNavigationBar: NavigationButton(),
       body: Container(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
         child: ListView(
@@ -114,22 +113,20 @@ class _ProfileState extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FriendButton(
+
                     state
                         ? Text(
-                            "Friends",
+                            "Following",
                             style: TextStyle(color: Colors.white),
                           )
-                        : Text(
-                            "Follow",
-                            style: TextStyle(color: Colors.black),
-                          ),
+                        : Text("Follow"),
                     state
                         ? Icon(Icons.check, color: Colors.white)
                         : Icon(
                             Icons.add,
                             color: Colors.black,
                           ),
-                    state ? Colors.blueAccent : Colors.white,
+                      state ? Colors.lightBlueAccent[700] : Colors.white,
                     changeState),
                 SizedBox(
                   width: 20,
@@ -141,14 +138,8 @@ class _ProfileState extends State<Profile> {
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(width: 5),
-                        Text('Message'),
-                      ],
-                    ),
+                        vertical: 13, horizontal: 30),
+                    child: Text('Message'),
                   ),
                 ),
               ],
