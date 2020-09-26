@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         centerTitle: true,
         title: Text(
-          "obligatory appbar title",
+          "FaceLink",
           style: TextStyle(
             color: Colors.white,
           ),
