@@ -19,7 +19,22 @@ class _AddPostState extends State<AddPost> {
 
   getImage(ImageSource source) async {
     File image = await ImagePicker.pickImage(source: source);
-
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        compressFormat: ImageCompressFormat.jpg,
+        androidUiSettings: AndroidUiSettings(
+          toolbarColor: Colors.blue,
+          toolbarTitle: "Crop Image",
+          statusBarColor: Colors.lightBlueAccent[700],
+          backgroundColor: Colors.white,
+        ),
+      );
+      this.setState(() {
+        _selectedFile = cropped;
+      });
+    }
   }
 
   List<FileModel> files;
@@ -46,7 +61,7 @@ class _AddPostState extends State<AddPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent[100],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: <Widget>[

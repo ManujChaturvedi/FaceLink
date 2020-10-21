@@ -12,18 +12,42 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   int selectedIndex = 0;
   // ignore: non_constant_identifier_names
-  Expanded profile_button(String buttonName) {
+  Color PostColor=Colors.white;
+  Color tagsColor=Colors.white;
+  Color videoColor=Colors.white;
+  Expanded profile_button(String buttonName,Color textColor) {
     return Expanded(
       child: FlatButton(
         onPressed: () {
           print('me');
+          setState(() {
+            if(buttonName=='Posts')
+              {
+                PostColor=Colors.black;
+                tagsColor=Colors.white;
+                videoColor=Colors.white;
+              }
+            else if(buttonName=='Videos')
+              {
+                PostColor=Colors.white;
+                tagsColor=Colors.white;
+                videoColor=Colors.black;
+              }
+            else if(buttonName=='Tags')
+            {
+              PostColor=Colors.white;
+              tagsColor=Colors.black;
+              videoColor=Colors.white;
+            }
+          });
+
         },
         child: Column(
           children: <Widget>[
             Container(
               child: Text(
                 buttonName,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: textColor),
               ),
             ),
             Icon(
@@ -54,9 +78,9 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent[100],
+      backgroundColor: Colors.lightBlueAccent,
       body: Container(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+        // padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
         child: ListView(
           children: <Widget>[
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
@@ -147,9 +171,9 @@ class _ProfileState extends State<Profile> {
             ),
             Row(
               children: <Widget>[
-                profile_button('Posts'),
-                profile_button('Videos'),
-                profile_button('Tags'),
+                profile_button('Posts',PostColor),
+                profile_button('Videos',videoColor),
+                profile_button('Tags',tagsColor),
               ],
             ),
             SizedBox(
@@ -157,10 +181,12 @@ class _ProfileState extends State<Profile> {
             ),
             ListBody(
               children: [
-                PostContainer("images/avatar.png"),
-                PostContainer("images/avatar-1.png"),
-                PostContainer("images/avatar.png"),
-                PostContainer("images/avatar-1.png"),
+                PostContainer("images/images1.jpg"),
+                PostContainer("images/images2.jpg"),
+                PostContainer("images/images3.jpg"),
+                PostContainer("images/images4.jpg"),
+                PostContainer("images/images5.jpg"),
+                PostContainer("images/images6.jpg"),
               ],
             ),
           ],
