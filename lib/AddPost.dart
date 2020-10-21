@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:facial_social_media1/post_container.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class _AddPostState extends State<AddPost> {
   }
 
   getImage(ImageSource source) async {
+    // ignore: deprecated_member_use
     File image = await ImagePicker.pickImage(source: source);
     if (image != null) {
       File cropped = await ImageCropper.cropImage(
@@ -27,7 +29,7 @@ class _AddPostState extends State<AddPost> {
         androidUiSettings: AndroidUiSettings(
           toolbarColor: Colors.blue,
           toolbarTitle: "Crop Image",
-          statusBarColor: Colors.lightBlueAccent[700],
+          statusBarColor: Colors.blue,
           backgroundColor: Colors.white,
         ),
       );
@@ -40,12 +42,24 @@ class _AddPostState extends State<AddPost> {
   List<FileModel> files;
   FileModel selectedModel;
   String image;
+  Widget imageFileSelect(String image)
+  {
+    if(image==null )
+      {
+        return Container();
+      }
+    else {
+      return Image.file(File(image),
+        // height: MediaQuery.of(context).size.height * 0.30,
+        // width: MediaQuery.of(context).size.width,
+      );
+  }
+  }
   @override
   void initState() {
     super.initState();
     getImagePath();
   }
-
   getImagePath() async {
     var imagePath = await StoragePath.imagesPath;
     var images = jsonDecode(imagePath) as List;
@@ -56,6 +70,10 @@ class _AddPostState extends State<AddPost> {
         image = files[0].files[0];
       });
     }
+    else
+      {
+        files=null;
+      }
   }
 
   @override
@@ -74,7 +92,8 @@ class _AddPostState extends State<AddPost> {
                     SizedBox(
                       width: 10,
                     ),
-                    DropdownButtonHideUnderline(
+                    files!=null
+                   ? DropdownButtonHideUnderline(
                       child: DropdownButton<FileModel>(
                         items: getItems(),
                         onChanged: (FileModel d) {
@@ -86,12 +105,14 @@ class _AddPostState extends State<AddPost> {
                         },
                         value: selectedModel,
                       ),
-                    ),
+                    )
+                   :  Container(),
                   ],
                 ),
+
                 FlatButton(
                   onPressed: (){
-                  // getImage(Image.file(File(image)),);
+                  //getImage(Image.file(File(image)),);
                   },
                   child: Text(
                     'Next',
@@ -100,57 +121,69 @@ class _AddPostState extends State<AddPost> {
                 ),
               ],
             ),
-            Divider(),
-            Container(
-                height: MediaQuery.of(context).size.height * 0.30,
-                child:  Image.file(File(image),
-                        height: MediaQuery.of(context).size.height * 0.30,
-                        width: MediaQuery.of(context).size.width,
-                      )
-                    ),
+            Divider(
+              color: Colors.black,
+            ),
+            files!=null
+            ?Expanded(
+                 //height: MediaQuery.of(context).size.height * 0.30,
+                child:  imageFileSelect(image),
+
+                    )
+            : Container(),
             Divider(),
             // Container(
             //   child: getImageWidget(),
             //),
+            files!=null
+            ?selectedModel == null  && selectedModel.files.length < 1
+                ? Expanded(child: Container())
+                : Expanded(
+                  child: Container(
+                      child: GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4),
+                          itemBuilder: (_,i) {
+                            var file=selectedModel.files[i];
+                            return GestureDetector(
+                              child: Image.file(
+                                File(file),
+                                fit: BoxFit.cover,
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  image = file;
+                                });
+                              },
+                            );
+                          },
+                     itemCount: selectedModel.files.length,),
+                    ),
+                ): Container(),
 
-            selectedModel == null && selectedModel.files.length < 1
-                ? Container()
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                    child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 4,
-                          mainAxisSpacing: 4),
-                        itemBuilder: (_,i) {
-                          var file=selectedModel.files[i];
-                          return GestureDetector(
-                            child: Image.file(
-                              File(file),
-                              fit: BoxFit.cover,
-                            ),
-                            onTap: () {
-                              setState(() {
-                                image = file;
-                              });
-                            },
-                          );
-                        },
-                   itemCount: selectedModel.files.length,),
-                  ),
+              SizedBox(
+                height: 2,
+              ),
+
             Row(mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                   CircleAvatar(
+                     radius: 25,
+                     backgroundColor: Colors.blue,
+                     child: IconButton(
+                       iconSize: 30,
+                         icon: PostInteraction(
+                           Icons.photo_camera,
+                           Colors.white,
+                         ),
 
-                   RaisedButton(
-                    color: Colors.lightBlueAccent[700],
-                    child: Text(
-                      'camera',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      getImage(ImageSource.camera);
-                    },
-                  ),
+                      onPressed: () {
+                        getImage(ImageSource.camera);
+                      },
+                     ),
+                   ),
               ],
             ),
           ],
@@ -160,13 +193,16 @@ class _AddPostState extends State<AddPost> {
   }
 
   List<DropdownMenuItem> getItems() {
-    return files.map((e) => DropdownMenuItem(
-                  child: Text(
-                    e.folder,
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  value: e,
-                )).toList() ?? [];
+
+      return files.map(
+              (e) => DropdownMenuItem(
+            child: Text(
+              e.folder,
+              style: TextStyle(color: Colors.black),
+            ),
+            value: e,
+          )).toList() ?? [];
+
 
   }
 }

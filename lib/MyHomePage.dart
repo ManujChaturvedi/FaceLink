@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'post_container.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -13,6 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // camera croper add by utsav
   getImage(ImageSource source) async {
+    // ignore: deprecated_member_use
     File image = await ImagePicker.pickImage(source: source);
     if (image != null) {
       File cropped = await ImageCropper.cropImage(
@@ -31,14 +33,14 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
-  // end camera
+  // end camera 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.blueGrey,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.lightBlueAccent[700],
+        backgroundColor: Colors.blue,
         leading: IconButton(
         icon: PostInteraction(
            Icons.photo_camera,
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
           onPressed: ()
           {
-            // call camera
+            // call camera 
            getImage(ImageSource.camera);
           },
         ),

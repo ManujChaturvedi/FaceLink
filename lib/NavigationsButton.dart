@@ -29,7 +29,6 @@ class _NavigationButtonState extends State<NavigationButton> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent[100],
       body: PageView(
         controller: _pagecontroller,
         children: _screens,
@@ -37,7 +36,6 @@ class _NavigationButtonState extends State<NavigationButton> {
 
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.lightBlueAccent[100],
 //        type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -63,8 +61,8 @@ class _NavigationButtonState extends State<NavigationButton> {
             title: Text("Profile"),
           ),
         ],
-        selectedItemColor: Colors.lightBlueAccent[700],
-        unselectedItemColor: Colors.lightBlueAccent[100],
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.black,
         currentIndex: selectedIndex,
         onTap: changeIndex,
       ),

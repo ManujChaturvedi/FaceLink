@@ -78,7 +78,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.blueGrey,
       body: Container(
         // padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
         child: ListView(
@@ -138,14 +138,14 @@ class _ProfileState extends State<Profile> {
                             "Following",
                             style: TextStyle(color: Colors.white),
                           )
-                        : Text("Follow"),
+                        : Text("  Follow   "),
                     state
                         ? Icon(Icons.check, color: Colors.white)
                         : Icon(
                             Icons.add,
                             color: Colors.black,
                           ),
-                      state ? Colors.lightBlueAccent[700] : Colors.white,
+                      state ? Colors.blue : Colors.white,
                     changeState),
                 SizedBox(
                   width: 20,
