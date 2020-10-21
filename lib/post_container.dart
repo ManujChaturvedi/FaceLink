@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'post-photo.dart';
+
 class PostContainer extends StatefulWidget {
   final String picAddress;
   PostContainer(this.picAddress);
   @override
   _PostContainerState createState() => _PostContainerState();
 }
+
 class _PostContainerState extends State<PostContainer> {
   bool state = false;
   void changeState() {
@@ -17,6 +20,7 @@ class _PostContainerState extends State<PostContainer> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +53,7 @@ class _PostContainerState extends State<PostContainer> {
               SizedBox(
                 height: 20,
               ),
-               PostContainerBody(widget.picAddress),
+              PostContainerBody(widget.picAddress),
               Container(
                 padding: EdgeInsets.all(5),
                 child: Row(
@@ -60,7 +64,9 @@ class _PostContainerState extends State<PostContainer> {
                       child: IconButton(
                         icon: PostInteraction(
                             state ? Icons.favorite : Icons.favorite_border,
-                            state ? Color(0xffec0101) : Colors.lightBlueAccent[700]),
+                            state
+                                ? Color(0xffec0101)
+                                : Colors.lightBlueAccent[700]),
                         onPressed: () {
                           changeState();
                         },
@@ -69,8 +75,8 @@ class _PostContainerState extends State<PostContainer> {
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: IconButton(
-                        icon: PostInteraction(
-                            Icons.chat_bubble_outline, Colors.lightBlueAccent[700]),
+                        icon: PostInteraction(Icons.chat_bubble_outline,
+                            Colors.lightBlueAccent[700]),
                         onPressed: () {
                           print('comments');
                         },
@@ -79,7 +85,8 @@ class _PostContainerState extends State<PostContainer> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: IconButton(
-                        icon: PostInteraction(Icons.near_me, Colors.lightBlueAccent[700]),
+                        icon: PostInteraction(
+                            Icons.near_me, Colors.lightBlueAccent[700]),
                         onPressed: () {
                           print('comments');
                         },
@@ -95,6 +102,7 @@ class _PostContainerState extends State<PostContainer> {
     );
   }
 }
+
 class PostInteraction extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
@@ -108,6 +116,7 @@ class PostInteraction extends StatelessWidget {
     );
   }
 }
+
 class PostBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
