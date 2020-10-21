@@ -54,7 +54,7 @@ class _PostContainerState extends State<PostContainer> {
                     child: IconButton(
                       icon: PostInteraction(
                           state ? Icons.favorite : Icons.favorite_border,
-                          state ? Color(0xffec0101) : Colors.lightBlueAccent[700]),
+                          state ? Color(0xffec0101) : Colors.black),
                       onPressed: () {
                         changeState();
                       },
@@ -64,7 +64,7 @@ class _PostContainerState extends State<PostContainer> {
                     padding: const EdgeInsets.all(4.0),
                     child: IconButton(
                       icon: PostInteraction(
-                          Icons.chat_bubble_outline, Colors.lightBlueAccent[700]),
+                          Icons.chat_bubble_outline, Colors.black),
                       onPressed: () {
                         print('comments');
                       },
@@ -73,7 +73,7 @@ class _PostContainerState extends State<PostContainer> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
-                      icon: PostInteraction(Icons.near_me, Colors.lightBlueAccent[700]),
+                      icon: PostInteraction(Icons.near_me, Colors.black),
                       onPressed: () {
                         print('comments');
                       },
