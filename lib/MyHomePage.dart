@@ -11,7 +11,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent[100],
+      backgroundColor: Colors.lightBlueAccent,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.lightBlueAccent[700],
@@ -44,12 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         child: ListView(
-          padding: EdgeInsets.all(15.0),
+          padding: EdgeInsets.all(0.0),
           children: [
-            PostContainer("images/avatar.png"),
-            PostContainer("images/avatar-1.png"),
-            PostContainer("images/avatar.png"),
-            PostContainer("images/avatar-1.png"),
+            PostContainer("images/images1.jpg"),
+            PostContainer("images/images2.jpg"),
+            PostContainer("images/images3.jpg"),
+            PostContainer("images/images4.jpg"),
+            PostContainer("images/images5.jpg"),
+            PostContainer("images/images6.jpg"),
           ],
         ),
       ),

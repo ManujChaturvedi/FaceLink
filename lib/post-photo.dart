@@ -7,10 +7,9 @@ class PostContainerBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
-      child: Container(
-        child: Image.asset(picAddress),
-      ),
+
+      elevation: 5,
+        child: Image.asset(picAddress)
     );
   }
 }

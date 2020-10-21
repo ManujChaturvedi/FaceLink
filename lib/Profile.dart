@@ -54,9 +54,9 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent[100],
+      backgroundColor: Colors.lightBlueAccent,
       body: Container(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+        // padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
         child: ListView(
           children: <Widget>[
             Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
@@ -157,10 +157,12 @@ class _ProfileState extends State<Profile> {
             ),
             ListBody(
               children: [
-                PostContainer("images/avatar.png"),
-                PostContainer("images/avatar-1.png"),
-                PostContainer("images/avatar.png"),
-                PostContainer("images/avatar-1.png"),
+                PostContainer("images/images1.jpg"),
+                PostContainer("images/images2.jpg"),
+                PostContainer("images/images3.jpg"),
+                PostContainer("images/images4.jpg"),
+                PostContainer("images/images5.jpg"),
+                PostContainer("images/images6.jpg"),
               ],
             ),
           ],
