@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'post_container.dart';
 
@@ -10,6 +13,26 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  getImage(ImageSource source) async {
+    // ignore: deprecated_member_use
+    File image = await ImagePicker.pickImage(source: source);
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+        sourcePath: image.path,
+        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        compressFormat: ImageCompressFormat.jpg,
+        androidUiSettings: AndroidUiSettings(
+          toolbarColor: Colors.blue,
+          toolbarTitle: "Crop Image",
+          statusBarColor: Colors.lightBlueAccent[700],
+          backgroundColor: Colors.white,
+        ),
+      );
+      this.setState(() {
+        //_selectedFile = cropped;
+      });
+    }
+  }
   int selectedIndex = 0;
   // ignore: non_constant_identifier_names
   Color PostColor=Colors.white;
@@ -19,7 +42,7 @@ class _ProfileState extends State<Profile> {
     return Expanded(
       child: FlatButton(
         onPressed: () {
-          print('me');
+
           setState(() {
             if(buttonName=='Posts')
               {
@@ -78,7 +101,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.blueGrey,
       body: Container(
         // padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
         child: ListView(
@@ -97,7 +120,9 @@ class _ProfileState extends State<Profile> {
                 Expanded(
                   child: Center(
                     child: RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        getImage(ImageSource.camera);
+                      },
                       child: Icon(
                         Icons.account_circle,
                         size: 80,
@@ -138,14 +163,14 @@ class _ProfileState extends State<Profile> {
                             "Following",
                             style: TextStyle(color: Colors.white),
                           )
-                        : Text("Follow"),
+                        : Text("  Follow   "),
                     state
                         ? Icon(Icons.check, color: Colors.white)
                         : Icon(
                             Icons.add,
                             color: Colors.black,
                           ),
-                      state ? Colors.lightBlueAccent[700] : Colors.white,
+                      state ? Colors.blue : Colors.white,
                     changeState),
                 SizedBox(
                   width: 20,
